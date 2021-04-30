@@ -8,10 +8,6 @@
     "build-ts": "tsc",
     "start": "node dist/index.js"
   },
-  "engines": {
-    "node": "12.x.x",
-    "npm": "6.x.x"
-  },
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "@types/winston": "^2.4.4",
