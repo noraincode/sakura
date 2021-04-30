@@ -5,8 +5,8 @@ import winston from "winston";
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 
-import { config } from './config';
-import { logger } from "./logger";
+import { config } from './src/config';
+import { logger } from "./src/logger";
 
 
 const app = new Koa();

@@ -2,7 +2,8 @@
     "version": 1,
     "name": "sakura",
     "builds": [
-        { "src": "src/*", "use": "@vercel/node" }
+        { "src": "src/*", "use": "@vercel/node" },
+        { "src": "index.ts", "use": "@vercel/node" }
     ],
     "routes": [
         { "src": "/(.*)", "dest": "/dist/index.js" }
