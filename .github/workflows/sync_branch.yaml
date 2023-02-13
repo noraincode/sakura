@@ -36,9 +36,7 @@ jobs:
             else
                 echo "exists=false" >> $GITHUB_OUTPUT          
             fi
-        shell: bash
-      - name: Checkout output
-        run: echo 'EXISTS = ${{ steps.check-branch-exists.outputs.exists }}'
+            echo 'EXISTS = ${{ steps.check-branch-exists.outputs.exists }}'
         shell: bash
 
       - name: Opening pull request staging -> ${{ matrix.branches }}
