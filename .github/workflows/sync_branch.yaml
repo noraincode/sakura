@@ -52,7 +52,7 @@ jobs:
         id: automerge
         uses: pascalgn/automerge-action@v0.15.5
         with:
-          MERGE_LABELS: automerge,sync-pr
+          # MERGE_LABELS: automerge,sync-pr
           MERGE_METHOD: merge
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
