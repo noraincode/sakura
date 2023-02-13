@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing branches
 
-    matrix:
     strategy:
       matrix:
         branches: ["release/incy", "release/kiwi", "release/tidy", "release/nike", "release/core"]
