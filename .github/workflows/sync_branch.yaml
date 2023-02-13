@@ -28,14 +28,15 @@ jobs:
         with:
           node-version: 16
 
-      - name: Check branch exists
-        id: check-branch-exists
-        # https://github.com/marketplace/actions/branch-exists
-        uses: GuillaumeFalourd/branch-exists@v1
-        with: 
-          branch: ${{ matrix.branches }}
-      - if: steps.check-branch-exists.outputs.exists == 'false'
-        run: echo '${{ matrix.branches }} Branch NOT FOUND'
+      -name: Check branch exists
+       id: check-branch-exists
+        run: |
+            if [[ -n $(git ls-remote --heads origin ${{ inputs.branch }}) ]]; then
+                echo "exists=true" >> $GITHUB_OUTPUT
+            else
+                echo "exists=false" >> $GITHUB_OUTPUT          
+            fi
+        shell: bash
 
       - name: Opening pull request staging -> ${{ matrix.branches }}
         if: steps.check-branch-exists.outputs.exists == 'true'
@@ -50,11 +51,4 @@ jobs:
           CONTENT_COMPARISON: true
           LABELS: '["sync-pr"]'
           REVIEWERS: '["noraincode"]'
-
-      - name: Auto merge
-        if: steps.create-pr.outputs.PULL_REQUEST_NUMBER != ''
-        id: automerge
-        uses: fastify/github-action-merge-dependabot@v3
-        with:
-          pr-number: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
-          merge-method: merge
+        
