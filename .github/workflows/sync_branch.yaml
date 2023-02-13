@@ -24,6 +24,14 @@ jobs:
         with:
           node-version: 16
 
+      - name: Check branch exists
+        id: check-branch-exists
+        uses: GuillaumeFalourd/branch-exists@v1
+        with: 
+          branch: ${{ matrix.branches }}
+      - if: steps.check-branch-exists.outputs.exists == 'false'
+        run: echo '${{ matrix.branches }} Branch NOT FOUND'
+
       - name: Opening pull request staging -> ${{ matrix.branches }}
         id: pull
         # https://github.com/marketplace/actions/sync-branches
