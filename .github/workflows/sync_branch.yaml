@@ -32,4 +32,4 @@ jobs:
           TO_BRANCH: "release/incy"
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to release/incy"
           CONTENT_COMPARISON: true
-          TEAM_REVIEWERS: ["noraincode"]
+          TEAM_REVIEWERS: '["noraincode"]'
