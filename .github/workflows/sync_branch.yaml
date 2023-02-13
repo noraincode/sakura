@@ -42,7 +42,7 @@ jobs:
         if: steps.check-branch-exists.outputs.exists == 'true'
         id: create-pr
         # https://github.com/marketplace/actions/sync-branches
-        uses: uses: tretuna/sync-branches@ea58ab6e406fd3ad016a064b31270bbb41127f41
+        uses: tretuna/sync-branches@ea58ab6e406fd3ad016a064b31270bbb41127f41
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "staging"
