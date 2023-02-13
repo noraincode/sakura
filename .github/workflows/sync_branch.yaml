@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing branches
 
+    permissions:
+      pull-requests: write
+      contents: write
+
     strategy:
       matrix:
         branches: ["release/incy", "release/kiwi", "release/tidy", "release/nike", "release/core"]
@@ -48,9 +52,6 @@ jobs:
           REVIEWERS: '["noraincode"]'
 
       - name: Auto merge
-        permissions:
-          pull-requests: write
-          contents: write
         if: steps.create-pr.outputs.PULL_REQUEST_NUMBER != ''
         id: automerge
         uses: fastify/github-action-merge-dependabot@v3
