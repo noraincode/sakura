@@ -47,8 +47,7 @@ jobs:
           LABELS: '["sync-pr"]'
           REVIEWERS: '["noraincode"]'
       
-      - run: echo '${{ steps.create-pr.PULL_REQUEST_NUMBER }}'
-      - run: echo '${{ github.event.inputs.pullRequestNumber }}'
+      - run: echo '${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
 
       - name: Auto approve
         if: steps.create-pr.PULL_REQUEST_NUMBER != ''
