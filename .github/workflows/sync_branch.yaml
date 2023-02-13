@@ -45,6 +45,15 @@ jobs:
           CONTENT_COMPARISON: true
           REVIEWERS: '["noraincode"]'
 
+      - name: Add sync-pr label
+        # https://github.com/marketplace/actions/add-labels
+        uses: christianvuerings/add-labels@v1
+        with:
+          labels: |
+            sync-pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3
         with:
