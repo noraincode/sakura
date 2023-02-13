@@ -48,11 +48,12 @@ jobs:
           REVIEWERS: '["noraincode"]'
 
       - name: Auto merge
+        permissions:
+          pull-requests: write
+          contents: write
         if: steps.create-pr.outputs.PULL_REQUEST_NUMBER != ''
         id: automerge
-        uses: pascalgn/automerge-action@v0.15.5
+        uses: fastify/github-action-merge-dependabot@v3
         with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: ""
-          MERGE_METHOD: merge
-          PULL_REQUEST: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
+          pr-number: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
+          merge-method: merge
