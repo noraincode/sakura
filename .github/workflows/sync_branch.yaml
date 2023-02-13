@@ -28,8 +28,8 @@ jobs:
         with:
           node-version: 16
 
-      -name: Check branch exists
-       id: check-branch-exists
+      - name: Check branch exists
+        id: check-branch-exists
         run: |
             if [[ -n $(git ls-remote --heads origin ${{ inputs.branch }}) ]]; then
                 echo "exists=true" >> $GITHUB_OUTPUT
@@ -42,7 +42,7 @@ jobs:
         if: steps.check-branch-exists.outputs.exists == 'true'
         id: create-pr
         # https://github.com/marketplace/actions/sync-branches
-        uses: tretuna/sync-branches@1.4.0
+        uses: uses: tretuna/sync-branches@ea58ab6e406fd3ad016a064b31270bbb41127f41
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "staging"
