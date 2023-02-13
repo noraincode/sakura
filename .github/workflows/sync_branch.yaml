@@ -53,5 +53,6 @@ jobs:
         uses: pascalgn/automerge-action@v0.15.5
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: ""
           MERGE_METHOD: merge
           PULL_REQUEST: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
