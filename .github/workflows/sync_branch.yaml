@@ -46,7 +46,7 @@ jobs:
           REVIEWERS: '["noraincode"]'
 
       - name: Auto approve
-        if: github.actor == 'github-actions'
+        uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
           review-message: "Auto approved sync-staging PR"
