@@ -33,7 +33,8 @@ jobs:
         run: echo '${{ matrix.branches }} Branch NOT FOUND'
 
       - name: Opening pull request staging -> ${{ matrix.branches }}
-        id: pull
+        if: steps.check-branch-exists.outputs.exists == 'true'
+        id: create_pr
         # https://github.com/marketplace/actions/sync-branches
         uses: tretuna/sync-branches@1.4.0
         with:
