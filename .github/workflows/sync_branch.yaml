@@ -44,3 +44,9 @@ jobs:
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
           REVIEWERS: '["noraincode"]'
+
+      - name: Auto approve
+        if: github.actor == 'github-actions[bot]'
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
