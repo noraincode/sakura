@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing branches
 
+    matrix:
+    strategy:
+      matrix:
+        branches: ["release/incy", "release/kiwi", "release/tidy", "release/nike", "release/core"]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,16 +25,14 @@ jobs:
         with:
           node-version: 16
 
-      # - name: Check PR exists
-
-      - name: Opening pull request staging -> incy
+      - name: Opening pull request staging -> ${{ matrix.branches }}
         id: pull
         # https://github.com/marketplace/actions/sync-branches
         uses: tretuna/sync-branches@1.4.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "staging"
-          TO_BRANCH: "release/incy"
-          PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to release/incy"
+          TO_BRANCH: ${{ matrix.branches }}
+          PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
-          TEAM_REVIEWERS: '["noraincode"]'
+          REVIEWERS: '["noraincode"]'
