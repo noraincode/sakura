@@ -53,5 +53,5 @@ jobs:
           TO_BRANCH: ${{ matrix.branches }}
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
-          REVIEWERS: '["${{github.actor}}""]'
+          REVIEWERS: '["${{github.actor}}"]'
         
