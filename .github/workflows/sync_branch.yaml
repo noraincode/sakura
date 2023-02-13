@@ -47,7 +47,7 @@ jobs:
         shell: bash
 
       - name: Opening pull request staging -> ${{ matrix.branches }}
-        if: steps.check-branch-exists.outputs.exists == true
+        if: steps.check-branch-exists.outputs.exists == 'true'
         id: create-pr
         # https://github.com/marketplace/actions/sync-branches
         uses: tretuna/sync-branches@ea58ab6e406fd3ad016a064b31270bbb41127f41
