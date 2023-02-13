@@ -52,5 +52,5 @@ jobs:
         uses: hmarr/auto-approve-action@v3
         with:
           pull-request-number: ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}
-          github-token: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           review-message: "Auto approved sync-staging PR"
