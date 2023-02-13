@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 16
 
-      - name: Check branch exists
+      - name: Check if branch exists
         id: check-branch-exists
         run: |
             if [[ -n $(git ls-remote --heads origin ${{ inputs.branch }}) ]]; then
@@ -41,6 +41,9 @@ jobs:
             else
                 echo "exists=false" >> $GITHUB_OUTPUT          
             fi
+        shell: bash
+      - name: Checkout output
+        run: echo 'EXISTS = ${{ steps.check-branch-exists.outputs.exists }}'
         shell: bash
 
       - name: Opening pull request staging -> ${{ matrix.branches }}
