@@ -36,7 +36,7 @@ jobs:
       - name: Check if branch exists
         id: check-branch-exists
         run: |
-            if [[ -n $(git ls-remote --heads origin ${{ inputs.branch }}) ]]; then
+            if [[ -n $(git ls-remote --heads origin ${{ matrix.branches }}) ]]; then
                 echo "exists=true" >> $GITHUB_OUTPUT
             else
                 echo "exists=false" >> $GITHUB_OUTPUT          
