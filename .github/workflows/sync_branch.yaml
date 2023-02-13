@@ -26,6 +26,7 @@ jobs:
 
       - name: Check branch exists
         id: check-branch-exists
+        # https://github.com/marketplace/actions/branch-exists
         uses: GuillaumeFalourd/branch-exists@v1
         with: 
           branch: ${{ matrix.branches }}
@@ -44,15 +45,6 @@ jobs:
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
           REVIEWERS: '["noraincode"]'
-
-      - name: Add sync-pr label
-        # https://github.com/marketplace/actions/add-labels
-        uses: christianvuerings/add-labels@v1
-        with:
-          labels: |
-            sync-pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3
