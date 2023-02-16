@@ -32,8 +32,8 @@ jobs:
         with:
           script: |
             const regex = /\[[A-Z]+-\d*\]|Sync|Merge|Bump
-            const label = github.event.pull_request.title.match(regex)
-            
+            const label_to_attach = github.event.pull_request.title.match(regex)
+
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
