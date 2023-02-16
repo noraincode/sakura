@@ -32,7 +32,7 @@ jobs:
             const pr_title = `${{ github.event.pull_request.title }}`
             const labels_to_attach = []
 
-            const is_auto_sync_pr = pr_title.contains('[Auto] Sync')
+            const is_auto_sync_pr = pr_title.includes('[Auto] Sync')
             if (is_auto_sync_pr) {
               labels_to_attach.push('auto-merge', 'sync-branch')
             }
