@@ -25,7 +25,7 @@ jobs:
           node-version: 16
 
       - name : Print Title of PR
-        run: echo 'The PR title is ${{ github.event.pull_request.title }}
+        run: echo 'The PR title is ${{ github.event.pull_request.title }}'
       
       - name: Auto label a PR
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
