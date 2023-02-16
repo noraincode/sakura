@@ -31,12 +31,9 @@ jobs:
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
         with:
           script: |
-            const regex = /\[[A-Z]+-\d*\]|Sync|Merge|Bump
-            const label_to_attach = github.event.pull_request.title.match(regex)
-
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["${{ label }}"]
+              labels: ["triage"]
             })
