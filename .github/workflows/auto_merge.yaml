@@ -1,0 +1,26 @@
+name: Auto Merge
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    name: Syncing branches
+
+    steps:
+    - name: Check PR approved
+      if: github.event.review.state == 'approved'
+      steps:
+        - run: echo "This PR was approved and ready to auto-merge"
+
+    - name: Auto-merge
+      id: automerge
+      uses: "pascalgn/automerge-action@eb68b061739cb9d81564f8e812d0b3c45f0fb09a" # v0.15.5
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        MERGE_LABELS: "auto-merge"  # The labels that need to be present for a pull request to be merged
+        MERGE_METHOD: "merge"
+        MERGE_COMMIT_MESSAGE: "Auto merged by git action after approved"
+        MERGE_REQUIRED_APPROVALS: "1" # Count of required approvals
