@@ -46,10 +46,10 @@ jobs:
             return labels_to_attach
 
       - name: Print Generated Labels of PR
-        run: echo 'The PR labels are ${{ steps.get-pr-labels.outputs.result }}, length ${{ steps.get-pr-labels.outputs.result.length }}'
+        run: echo 'The PR labels are ${{ steps.get-pr-labels.outputs.result }}'
       
       - name: Add labels to PR
-        if: steps.get-pr-labels.outputs.result.length != 0
+        if: steps.get-pr-labels.outputs.result
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
         with:
           script: |
