@@ -3,9 +3,6 @@ on:
   pull_request:
     types: [opened, edited]
 
-env:
-  PULL_REQUEST_NUMBER: ${{ github.event.number }}
-
 jobs:
   pr-labeler:
     runs-on: ubuntu-latest
@@ -24,10 +21,35 @@ jobs:
         with:
           node-version: 16
 
-      - name : Print Title of PR
+      - name: Print Title of PR
         run: echo 'The PR title is ${{ github.event.pull_request.title }}'
       
-      - name: Auto label a PR
+      - name: Get PR labels to attach
+        id: get-pr-labels
+        uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
+        with:
+          script: |
+            const pr_title = github.event.pull_request.title
+            const labels_to_attach = []
+
+            const is_auto_sync_pr = pr_title.contains('[Auto] Sync')
+            if (is_auto_sync_pr) {
+              labels_to_attach.push('auto-merge', 'sync-branch')
+            }
+
+            const label_from_title = pr_title.match(/\[[A-Z]+-\d*\]|Sync|Merge|Bump/g)[0]
+            if (label_from_title !== '') {
+              const label_flag = label_from_title.replace(/\[|]/g,'').toLowerCase()
+              labels_to_attach.push(label_flag)
+            }
+
+            return labels_to_attach
+
+      - name: Print Generated Labels of PR
+        run: echo 'The PR labels are ${{ steps.get-pr-labels.outputs.result }}'
+      
+      - name: Add labels to PR
+        if: steps.get-pr-labels.outputs.result.length != 0
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
         with:
           script: |
@@ -35,5 +57,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["triage"]
+              labels: ${{ steps.get-pr-labels.outputs.result.length }}
             })
