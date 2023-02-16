@@ -6,7 +6,7 @@ on:
 jobs:
   pr-labeler:
     runs-on: ubuntu-latest
-    name: Auto label a PR by Jira ticket in title
+    name: Auto label a PR by keywords in title
 
     permissions:
       pull-requests: write
@@ -37,10 +37,9 @@ jobs:
               labels_to_attach.push('auto-merge', 'sync-branch')
             }
 
-            const label_from_title = pr_title.match(/\[[A-Z]+-\d*\]|Sync|Merge|Bump/g)[0]
-            if (label_from_title !== '') {
-              const label_flag = label_from_title.replace(/\[|]/g,'').toLowerCase()
-              labels_to_attach.push(label_flag)
+            const jira_number_from_title = pr_title.match(/\[[A-Z]+-\d*\]/g)
+            if (jira_number_from_title.length > 0) {
+              labels_to_attach.push(jira_number_from_title[0].replace(/\[|]/g,'').toLowerCase())
             }
 
             return labels_to_attach
