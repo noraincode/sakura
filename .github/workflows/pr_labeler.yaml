@@ -51,6 +51,7 @@ jobs:
         if: steps.get-pr-labels.outputs.result != '[]'
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
