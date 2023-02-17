@@ -15,8 +15,7 @@ jobs:
     steps:
     - name: Check PR approved
       if: github.event.review.state == 'approved'
-      steps:
-        - run: echo "This PR was approved and ready to auto-merge"
+      run: echo "This PR was approved and ready to auto-merge"
 
     - name: Auto-merge
       id: automerge
