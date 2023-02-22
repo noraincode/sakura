@@ -46,7 +46,7 @@ jobs:
         if: steps.check-branch-exists.outputs.exists == 'true'
         id: create-pr
         # https://github.com/marketplace/actions/sync-branches
-        uses: tretuna/sync-branches@ea58ab6e406fd3ad016a064b31270bbb41127f41
+        uses: tretuna/sync-branches@19c35d47924181ef967f7628fcd945854bedb9ed
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "staging"
@@ -54,4 +54,5 @@ jobs:
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
           REVIEWERS: '["${{github.actor}}"]'
+          LABELS: '["auto-merge", "sync-branch"]'
         
