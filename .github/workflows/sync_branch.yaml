@@ -58,11 +58,11 @@ jobs:
 
       - name: Print output
         id: print-pr-number
-        run: echo 'pr_number = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
+        run: echo 'PRNUMBER = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
         shell: bash
 
       - name: Add labels to PR
-          if: steps.print-pr-number.outputs.pr_number != ''
+          if: steps.print-pr-number.outputs.PRNUMBER != ''
           uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
