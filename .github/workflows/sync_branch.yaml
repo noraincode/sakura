@@ -56,13 +56,9 @@ jobs:
           CONTENT_COMPARISON: true
           REVIEWERS: '["${{github.actor}}"]'
 
-      - name: Print output
-        id: print-pr-number
-        run: echo 'PRNUMBER = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
-        shell: bash
-
       - name: Add labels to PR
         id: add-pr-label
+        if: steps.create-pr.outputs.PULL_REQUEST_NUMBER != ''
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
