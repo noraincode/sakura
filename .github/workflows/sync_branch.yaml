@@ -55,5 +55,21 @@ jobs:
           PULL_REQUEST_TITLE: ":twisted_rightwards_arrows: [Auto] Sync staging to ${{ matrix.branches }}"
           CONTENT_COMPARISON: true
           REVIEWERS: '["${{github.actor}}"]'
-          LABELS: '["auto-merge", "sync-branch"]'
+
+      - name: Print output
+        run: echo 'EXISTS = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
+        shell: bash
+
+      - name: Add labels to PR
+          if: steps.get-pr-labels.outputs.result != '[]'
+          uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            script: |
+              github.rest.issues.addLabels({
+                issue_number: steps.create-pr.outputs.PULL_REQUEST_NUMBER,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ['sync']
+              })
         
