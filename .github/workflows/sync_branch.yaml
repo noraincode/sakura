@@ -57,11 +57,12 @@ jobs:
           REVIEWERS: '["${{github.actor}}"]'
 
       - name: Print output
-        run: echo 'EXISTS = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
+        id: print-pr-number
+        run: echo 'pr_number = ${{ steps.create-pr.outputs.PULL_REQUEST_NUMBER }}'
         shell: bash
 
       - name: Add labels to PR
-          if: steps.get-pr-labels.outputs.result != '[]'
+          if: steps.print-pr-number.outputs.pr_number != ''
           uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975 # v6
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
